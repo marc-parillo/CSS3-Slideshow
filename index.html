@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="build/styles.css" />
+</head>
+
+<body>
+
+  <div id="page">
+
+    <header id="header">
+
+      <div id="pusher">
+
+        <div id="content">
+
+          <h1>Slideshow</h1>
+
+          <main id="limit" role="main">
+
+            <article class="article">
+
+              <section>
+
+                <div class="image-viewer" id="image-viewer">
+                  <ul>
+                    <li class="active">
+                      <img src="images/image1.jpg" alt="Car #1" title="Car #1" />
+                    </li>
+                    <li>
+                      <img src="images/image2.jpg" alt="Car #2" title="Car #2" />
+                    </li>
+                    <li>
+                      <img src="images/image3.jpg" alt="Car #3" title="Car #3" />
+                    </li>
+                  </ul>
+                </div>
+                <div class="image-controls" id="image-controls">
+                  <ul>
+                    <li><a href="#" id="prev">&#10096;</a>
+                    </li>
+                    <li><a href="#" id="toggle">Pause</a>
+                    </li>
+                    <li><a href="#" id="next">&#10097;</a>
+                    </li>
+                  </ul>
+
+                </div>
+
+              </section>
+
+            </article>
+
+          </main>
+
+        </div>
+
+        <div id="nav"></div>
+
+      </div>
+
+    </header>
+
+  </div>
+
+  <footer id="footer">
+
+    <nav id="footernav"></nav>
+
+  </footer>
+
+  <script src="fader.js"></script>
+  <script>
+  window.onload = function() {
+      slideshow.init();
+  };
+  </script>
+
+</body>
+
+</html>
