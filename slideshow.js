@@ -6,6 +6,8 @@ var slideshow = (function () {
 
       timer: 5000,
 
+      startOnLoad : true,
+
       interval: null,
 
       list: [],
@@ -16,10 +18,8 @@ var slideshow = (function () {
 
           stopSlideShow();
 
-          var btn = document.querySelector("#toggle");
-          btn.innerHTML = "Resume";
-
-          setNewImage('prev');  
+          setToggleButton('Resume');
+          setNewImage('prev');
           revealImage();
 
         },
@@ -27,11 +27,8 @@ var slideshow = (function () {
         'next': function () {
 
           stopSlideShow();
-
-          var btn = document.querySelector("#toggle");
-          btn.innerHTML = "Resume";
-
-          setNewImage('next');  
+          setToggleButton('Resume');
+          setNewImage('next');
           revealImage();
 
         },
@@ -39,20 +36,20 @@ var slideshow = (function () {
         'toggle': function () {
 
           var isPlaying = this.interval !== null,
-            text, btn;
+              text;
 
           if (isPlaying) {
             stopSlideShow();
             text = "Resume";
           } else {
-            setNewImage('next');  
+            setNewImage('next');
             revealImage();
             startSlideShow();
             text = "Pause";
           }
 
-          btn = document.querySelector("#toggle");
-          btn.innerHTML = text;
+          setToggleButton(text);
+          
 
         }
 
@@ -63,18 +60,25 @@ var slideshow = (function () {
     init = function (params) {
 
       if (params) {
-        config.timer = (typeof params.timer !== undefined) ? parseInt(params.timer,10) : 5000;
+        config.timer = (typeof params.timer !== undefined) ? parseInt(params.timer, 10) : 5000;
+        config.startOnLoad = (typeof params.startOnLoad !== undefined) ? !!params.startOnLoad : true;
       }
 
       var slideshow = document.querySelector("#image-viewer");
       config.list = slideshow.getElementsByTagName('li');
 
-      if (config.list.length<=1) {
-        console.info('Add at least two images');
+      if (config.list.length <= 1) {
+        console.info('Add at least two images to start the slideshow');
         return;
       }
 
-      startSlideShow();
+      if (config.startOnLoad) {
+        startSlideShow();
+      } else {
+        revealImage();
+        setToggleButton('Resume');
+      }
+
       addEvents();
 
     },
@@ -139,9 +143,16 @@ var slideshow = (function () {
     clickEvent = function (e) {
 
       var target = e.target,
-        id = target.id;
+          id = target.id;
 
       config.allEvents[id].call(config);
+
+    },
+
+    setToggleButton = function(text) {
+
+      var btn = document.querySelector("#toggle");
+      btn.innerHTML = text;
 
     };
 
