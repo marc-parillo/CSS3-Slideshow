@@ -60,12 +60,16 @@ var slideshow = (function () {
 
     },
 
-    init = function () {
+    init = function (params) {
+
+      if (params) {
+        config.timer = (typeof params.timer !== undefined) ? parseInt(params.timer,10) : 5000;
+      }
 
       var slideshow = document.querySelector("#image-viewer");
       config.list = slideshow.getElementsByTagName('li');
 
-      if (config.list.length==0) {
+      if (config.list.length<=1) {
         console.info('Add at least two images');
         return;
       }
